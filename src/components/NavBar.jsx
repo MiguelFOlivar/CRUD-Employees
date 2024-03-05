@@ -12,7 +12,7 @@ function NavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav
-            className="me-auto my-2 my-lg-0"
+            className="me-auto my-2 my-lg-0" style={{maxHeight: '100px'}}
           ></Nav>
           <Form className="d-flex">
             <Button variant="outline-success">Agregar Empleado</Button>
