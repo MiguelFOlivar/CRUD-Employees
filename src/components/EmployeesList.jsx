@@ -1,18 +1,20 @@
-import { Card, Table } from "react-bootstrap";
+import { Card, Container, Image, Table } from "react-bootstrap";
 import { EmployeeItemTable } from "./EmployeeItemTable";
 import { useEffect, useState } from "react";
 import { getEmployeesList } from "../service/localstorage";
 
 export const EmployeesList = () => {
   const [employees, setEmployees] = useState([]);
-  
+
   useEffect(() => {
-        setEmployees(getEmployeesList());
-  }, [])
+    setEmployees(getEmployeesList());
+  }, []);
 
   return (
     <>
-      <h1 className="text-center my-5" style={{color:'#3a86ff'}}>Lista de Empleados</h1>
+      <h1 className="text-center my-5" style={{ color: "#3a86ff" }}>
+        Lista de Empleados
+      </h1>
 
       {employees.length > 0 ? (
         <Card bg="secondary" className="p-3">
@@ -28,15 +30,24 @@ export const EmployeesList = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                employees.map( employee => <EmployeeItemTable employee={employee} key={employee.id} 
-                    setEmployees={setEmployees}/>)
-              }
+              {employees.map((employee) => (
+                <EmployeeItemTable
+                  employee={employee}
+                  key={employee.id}
+                  setEmployees={setEmployees}
+                />
+              ))}
             </tbody>
           </Table>
         </Card>
       ) : (
-        <h3 className="text-center">Sin Empleados</h3>
+        <Container className=" d-grid my-5 justify-content-around align-items-center">
+
+          <h3 className="text-center">Sin Registros</h3>
+        <Card style={{ width: "25rem" }} >
+          <Card.Img variant="top" src="../../public/img/notepad.jpg" />
+        </Card>
+        </Container>
       )}
     </>
   );
