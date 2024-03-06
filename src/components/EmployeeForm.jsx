@@ -34,7 +34,7 @@ export const EmployeeForm = () => {
     resetDataForm();
     setTimeout(() => {
         setshowMessage( false )}
-        , 10000);
+        , 2500);
   };
 
   useEffect(() => {
@@ -64,6 +64,7 @@ export const EmployeeForm = () => {
             <Form.Control
               type="text"
               placeholder="Ingresa Nombre(s)"
+              required="true"
               size="sm"
               id="txtNombres"
               name="nombres"
@@ -80,6 +81,7 @@ export const EmployeeForm = () => {
             <Form.Control
               type="text"
               placeholder="Ingresa Apellido"
+              required="true"
               size="sm"
               id="txtApellido"
               name="apellido"
@@ -93,7 +95,9 @@ export const EmployeeForm = () => {
 
           <Form.Group className="mb-3" controlid="formEmail">
             <Form.Label>E-mail</Form.Label>
-            <Form.Control type="email" placeholder="Ingresa E-mail" size="sm"
+            <Form.Control type="email" placeholder="Ingresa E-mail"
+            required="true"
+            size="sm"
             id="txtEmail"
             name="email"
             value={inputValues.email}
