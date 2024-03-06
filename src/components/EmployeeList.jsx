@@ -1,27 +1,41 @@
-import { Card, Table } from "react-bootstrap"
-import { EmployeeItemTable } from "./EmployeeItemTable"
+import { Card, Table } from "react-bootstrap";
+import { EmployeeItemTable } from "./EmployeeItemTable";
+import { useEffect, useState } from "react";
+import { getEmployeesList } from "../service/localstorage";
 
 export const EmployeeList = () => {
+  const [employees, setEmployees] = useState([]);
+  useEffect(() => {
+        setEmployees(getEmployeesList());
+  }, [])
+
   return (
     <>
-    <h2 className="text-center my-5">Lista de Empleados</h2>
-    <Card bg="secondary" className="p-3">
-        <Table striped bordered hover responsive>
+      <h1 className="text-center my-5">Lista de Empleados</h1>
+
+      {employees.length > 0 ? (
+        <Card bg="secondary" className="p-3">
+          <Table striped bordered hover responsive>
             <thead>
-                <tr>
-                    <th>Nombres</th>
-                    <th>Apellido</th>
-                    <th>E-mail</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
-                </tr>
+              <tr>
+                <th>Nombres</th>
+                <th>Apellido</th>
+                <th>E-mail</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+              </tr>
             </thead>
             <tbody>
-                <EmployeeItemTable/>
+              {
+                employees.map( employee => <EmployeeItemTable employee={employee} key={employee.id}/>)
+              }
             </tbody>
-        </Table>
-    </Card>
+          </Table>
+        </Card>
+      ) : (
+        <h3 className="text-center">Sin Empleados</h3>
+      )}
     </>
-  )
-}
+  );
+};

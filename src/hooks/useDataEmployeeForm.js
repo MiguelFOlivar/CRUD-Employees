@@ -16,9 +16,14 @@ export const useDataEmployeeForm = ( initialState={} ) => {
             }
         );
     }
+
+    const setDataForm = ( newValues ) => {
+        setinputValues( newValues );
+    }
     return{
         inputValues,
         resetDataForm,
-        handleInputForm
+        handleInputForm,
+        setDataForm
     }
 }

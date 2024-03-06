@@ -1,11 +1,19 @@
 import { Button, Card, Form } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDataEmployeeForm } from "../hooks/useDataEmployeeForm";
+import { addEmployee, getEmployeeById } from "../service/localstorage";
+import { AlertForm } from "./AlertForm";
+import { useEffect, useState } from "react";
 
 export const EmployeeForm = () => {
   const navigate = useNavigate();
 
-  const { inputValues, handleInputForm, resetDataForm } = useDataEmployeeForm({
+  const [showMessage, setshowMessage] = useState( false );
+
+  const {id} = useParams();
+
+  const { inputValues, handleInputForm, resetDataForm, setDataForm } = useDataEmployeeForm({
+
     //Valores iniciales del formulario
     nombres: "",
     apellido: "",
@@ -15,10 +23,25 @@ export const EmployeeForm = () => {
   });
 
   const handleSubmit = (e) => {
-    e.preventDefaut();
+    e.preventDefault();
     /* Validaciones js de elementos */
-    console.log(inputValues);
+
+    addEmployee( inputValues );
+    setshowMessage( true );
+    resetDataForm();
+    setTimeout(() => {
+        setshowMessage( false )}
+        , 10000);
   };
+
+  useEffect(() => {
+    if(id) {
+        const employee = getEmployeeById( id );
+        setDataForm( employee );
+    }
+
+  }, [id])
+
   return (
     <>
       {/* Header */}
@@ -26,7 +49,7 @@ export const EmployeeForm = () => {
         <Button variant="info" onClick={() => navigate("/")}>
           Volver
         </Button>
-        <h2>Agregar nuevo empleado</h2>
+        <h1>{id?"Editar " : "Agregar "} Empleado</h1>
       </div>
 
       {/* Formulario */}
@@ -108,12 +131,14 @@ export const EmployeeForm = () => {
               variant=""
               className="btn btn-outline-primary"
               type="submit"
+              
             >
               Guardar Datos
             </Button>
           </div>
         </Form>
       </Card>
+      {showMessage && <AlertForm/>}
     </>
   );
 };
