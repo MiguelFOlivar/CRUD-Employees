@@ -1,7 +1,7 @@
 import { Button, Card, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { useDataEmployeeForm } from "../hooks/useDataEmployeeForm";
-import { addEmployee, getEmployeeById } from "../service/localstorage";
+import { addEmployee, editEmployee, getEmployeeById } from "../service/localstorage";
 import { AlertForm } from "./AlertForm";
 import { useEffect, useState } from "react";
 
@@ -26,7 +26,10 @@ export const EmployeeForm = () => {
     e.preventDefault();
     /* Validaciones js de elementos */
 
-    addEmployee( inputValues );
+    // Comprobamos si existe el id, de ser así se llama a la funcion editar, de lo contrario se agrega 
+    //un nuevo registro
+    id?editEmployee( id, inputValues ) : addEmployee( inputValues );
+
     setshowMessage( true );
     resetDataForm();
     setTimeout(() => {
@@ -45,11 +48,11 @@ export const EmployeeForm = () => {
   return (
     <>
       {/* Header */}
-      <div className="d-flex my-5 justify-content-between">
+      <div className="d-flex my-5 justify-content-around">
         <Button variant="info" onClick={() => navigate("/")}>
           Volver
         </Button>
-        <h1>{id?"Editar " : "Agregar "} Empleado</h1>
+        <h1 style={{color: '#3a86ff'}}>{id?"Editar " : "Agregar "} Empleado</h1>
       </div>
 
       {/* Formulario */}
@@ -137,8 +140,8 @@ export const EmployeeForm = () => {
             </Button>
           </div>
         </Form>
+        {showMessage && <AlertForm/>}
       </Card>
-      {showMessage && <AlertForm/>}
     </>
   );
 };

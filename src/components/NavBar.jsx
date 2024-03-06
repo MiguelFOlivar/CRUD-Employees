@@ -10,7 +10,7 @@ function NavBar() {
   const navigate = useNavigate();
   return (
 
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="primary" data-bs-theme="light">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="primary" data-bs-theme="dark">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">CRUD Empleados</Navbar.Brand>{/* lo usamos para volver a la página de inicio */}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

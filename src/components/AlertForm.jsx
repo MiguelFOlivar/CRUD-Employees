@@ -6,13 +6,7 @@ export const AlertForm = () => {
         <Alert.Heading>
             Acción Realizada.
         </Alert.Heading>
-        <p>
-            Se han registrado los datos del empleado de manera exitosa.
-        </p>
-        <hr />
-        <p className="mb-0">
-            puede volver a la página principal para ver los resultados.
-        </p>
+            <small>Se han registrado los datos del empleado de manera exitosa.</small>
     </Alert>
   )
 }

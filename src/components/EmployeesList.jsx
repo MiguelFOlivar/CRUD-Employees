@@ -3,15 +3,16 @@ import { EmployeeItemTable } from "./EmployeeItemTable";
 import { useEffect, useState } from "react";
 import { getEmployeesList } from "../service/localstorage";
 
-export const EmployeeList = () => {
+export const EmployeesList = () => {
   const [employees, setEmployees] = useState([]);
+  
   useEffect(() => {
         setEmployees(getEmployeesList());
   }, [])
 
   return (
     <>
-      <h1 className="text-center my-5">Lista de Empleados</h1>
+      <h1 className="text-center my-5" style={{color:'#3a86ff'}}>Lista de Empleados</h1>
 
       {employees.length > 0 ? (
         <Card bg="secondary" className="p-3">
@@ -28,7 +29,8 @@ export const EmployeeList = () => {
             </thead>
             <tbody>
               {
-                employees.map( employee => <EmployeeItemTable employee={employee} key={employee.id}/>)
+                employees.map( employee => <EmployeeItemTable employee={employee} key={employee.id} 
+                    setEmployees={setEmployees}/>)
               }
             </tbody>
           </Table>
