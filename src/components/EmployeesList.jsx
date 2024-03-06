@@ -41,13 +41,7 @@ export const EmployeesList = () => {
           </Table>
         </Card>
       ) : (
-        <Container className=" d-grid my-5 justify-content-around align-items-center">
-
           <h3 className="text-center">Sin Registros</h3>
-        <Card style={{ width: "25rem" }} >
-          <Card.Img variant="top" src="../../public/img/notepad.jpg" />
-        </Card>
-        </Container>
       )}
     </>
   );
